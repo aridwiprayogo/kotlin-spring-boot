@@ -18,7 +18,5 @@ class News(
 	var head: String?="",
 	@get: NotBlank
 	var body: String?="" 
-	): Serializable{
-
-}
+	): Serializable
 
