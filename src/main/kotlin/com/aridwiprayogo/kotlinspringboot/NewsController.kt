@@ -9,8 +9,7 @@ import java.util.Optional;
 public class NewsController(private val _newsRepository: NewsRepository) {
 
     @GetMapping
-    fun getNews(): Iterable<News> = _newsRepository.findAll()
-
+    fun getNews(): List<News> = _newsRepository.findAll()
     @PostMapping
     fun saveNews(@RequestBody news: News) = _newsRepository.save(news)
 
