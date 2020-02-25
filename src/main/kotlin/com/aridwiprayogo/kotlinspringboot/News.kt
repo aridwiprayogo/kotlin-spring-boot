@@ -7,11 +7,11 @@ import javax.persistence.Id;
 
 
 @Entity
-data class News(
-	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private val id: Long?=null,
-	private val author: String,
-	private val head: String,
-	private val body: String 
-	)
+class News(
+    @Id 
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long?=null,
+    var author: String,
+    var head: String,
+    var body: String 
+)
