@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import java.io.Serializable
 
 @Entity
-class News(
+data class News(
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	var id: Long?=0,
