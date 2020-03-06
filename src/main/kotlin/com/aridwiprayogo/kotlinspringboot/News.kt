@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity
 data class News(
-        id: UUID?=null,
+        var id: UUID?=null,
         @get: NotBlank
         var author: String? = "",
         @get: NotBlank
