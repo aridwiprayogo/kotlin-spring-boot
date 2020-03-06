@@ -8,12 +8,12 @@ import javax.persistence.*
 @MappedSuperclass
 abstract class AbstractBaseEntity(givenId: UUID?=null) : Persistable<UUID>  {
     @Id
-    var id: UUID = givenId ?: UUID.randomUUID()
+    private val id: UUID = givenId ?: UUID.randomUUID()
     
     @Transient
     private var persisted: Boolean = givenId != null
-    
-    override fun getId(): UUID = id
+
+    override fun getId(): UUID? = id
 
     override fun isNew(): Boolean = !persisted
 
