@@ -1,18 +1,23 @@
 package com.aridwiprayogo.kotlinspringboot
 
-import java.io.Serializable
+import org.springframework.data.domain.Persistable
 import java.util.*
-import javax.persistence.Id
-import javax.persistence.MappedSuperclass
+import javax.persistence.*
 
 
 @MappedSuperclass
-abstract class AbstractBaseEntity : Serializable {
+abstract class AbstractBaseEntity(givenId: UUID?=null) : Persistable<UUID>  {
     @Id
-    var id: String = UUID.randomUUID().toString()
-    override fun hashCode(): Int {
-        return id.hashCode()
-    }
+    var id: UUID = givenId ?: UUID.randomUUID()
+    
+    @Transient
+    private var persisted: Boolean = givenId != null
+    
+    override fun getId(): UUID = id
+
+    override fun isNew(): Boolean = !persisted
+
+    override fun hashCode(): Int = id.hashCode()
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -20,7 +25,13 @@ abstract class AbstractBaseEntity : Serializable {
         if (other !is AbstractBaseEntity) {
             return false
         }
-        return id == other.id
+        return getId() == other.id
+    }
+    
+    @PostPersist
+    @PostLoad
+    private fun setPersisted() {
+        persisted = true
     }
 
     companion object {
