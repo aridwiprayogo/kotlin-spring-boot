@@ -17,7 +17,4 @@ class News(
         var body: String? = "",
         @Column(name = "CREATED_AT")
         var created_at: LocalDate? = LocalDate.now()
-) : AbstractBaseEntity(id) {
-
-}
-
+) : AbstractBaseEntity(id)

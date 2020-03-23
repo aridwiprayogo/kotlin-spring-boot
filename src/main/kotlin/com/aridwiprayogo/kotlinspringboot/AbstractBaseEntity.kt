@@ -1,8 +1,7 @@
 package com.aridwiprayogo.kotlinspringboot
 
-import org.springframework.data.domain.Persistable
 import org.hibernate.annotations.GenericGenerator
-import java.io.Serializable
+import org.springframework.data.domain.Persistable
 import java.util.*
 import javax.persistence.*
 
@@ -12,12 +11,12 @@ abstract class AbstractBaseEntity(givenId: UUID?=null) : Persistable<UUID>  {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    var id: UUID = UUID.randomUUID()
+    var id: String = givenId.toString()
 
     @Transient
     private var persisted: Boolean = givenId != null
 
-    override fun getId(): UUID? = id
+    override fun getId(): UUID? = UUID.fromString(id)
 
     override fun isNew(): Boolean = !persisted
 
