@@ -1,6 +1,7 @@
 package com.aridwiprayogo.kotlinspringboot
 
 import org.hibernate.annotations.GenericGenerator
+import org.hibernate.annotations.Type
 import java.time.LocalDate
 import java.util.*
 import javax.persistence.Column
@@ -14,6 +15,7 @@ class News(
         @Id
         @GeneratedValue(generator = "uuid2")
         @GenericGenerator(name = "uuid2", strategy = "uuid2")
+        @Type(type = "uuid2")
         var id: UUID = UUID.randomUUID(),
         @get: NotBlank
         var author: String? = "",
