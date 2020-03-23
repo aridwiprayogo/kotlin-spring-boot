@@ -1,14 +1,20 @@
 package com.aridwiprayogo.kotlinspringboot
 
+import org.hibernate.annotations.GenericGenerator
 import java.time.LocalDate
 import java.util.*
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
 import javax.validation.constraints.NotBlank
 
 @Entity
 class News(
-        id: UUID?=null,
+        @Id
+        @GeneratedValue(generator = "uuid2")
+        @GenericGenerator(name = "uuid2", strategy = "uuid2")
+        var id: UUID = UUID.randomUUID(),
         @get: NotBlank
         var author: String? = "",
         @get: NotBlank
@@ -17,7 +23,4 @@ class News(
         var body: String? = "",
         @Column(name = "CREATED_AT")
         var created_at: LocalDate? = LocalDate.now()
-) : AbstractBaseEntity(id) {
-
-}
-
+)
